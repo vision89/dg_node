@@ -1,4 +1,4 @@
-#DG_Node
+# DG_Node
 
 * DG_Node is a node data structure written in C.
 * It is distributed under the new bsd license.

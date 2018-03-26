@@ -1,4 +1,4 @@
-#New BSD License#
+## New BSD License
 
 Copyright 2018 Dustin Gulley
 
