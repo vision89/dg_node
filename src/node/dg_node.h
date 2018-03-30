@@ -18,7 +18,7 @@
  * @brief dg_node_t structure
  * @author Dustin Gulley
  * @date 03/30/2018
- * The DG_Node_t structure holds void data and a reference to another node
+ * The DG_Node_t structure holds void data and a reference to another node.  This is used with the DG_Node type (see the types associated with the members for an example).
  *
  */
 struct DG_Node_t {
@@ -26,15 +26,7 @@ struct DG_Node_t {
   struct DG_Node_t *next;             /**< Reference to another dg_node. */
 };
 
-/**
- *
- * @brief A realization of the DG_Node_t
- * @author Dustin Gulley
- * @date 03/30/2018
- * A realization of the DG_Node_t.  This is the typical type used when building applications with dg_node.
- *
- */
-typedef struct DG_Node_t DG_Node;
+typedef struct DG_Node_t DG_Node;     /**< A realization of the DG_Node_t.  This is the typical type used. */
 
 /**
  *
