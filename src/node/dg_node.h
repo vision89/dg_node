@@ -1,3 +1,12 @@
+/**
+ *
+ * @file dg_node.ht
+ * @brief this header file contains the dg_node struct and all functions associated with the dg_node.
+ * @author Dustin Gulley
+ * @date 03/30/2018
+ *
+ */
+
 #ifndef DG_NODE_H_   // Include guard
 #define DG_NODE_H_
 
