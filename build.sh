@@ -2,7 +2,11 @@
 
 clear
 
-echo "Building the dg_node
+echo "Building dg_node"
+
+if [ ! -d "./bin" ]; then
+  mkdir ./bin
+fi
 
 rm -rf ./bin/*
 
