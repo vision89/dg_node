@@ -13,16 +13,39 @@
 #include <sys/types.h>
 #include <stdlib.h>
 
-// A node designed to be used in the linked list
+/**
+ *
+ * @brief dg_node_t structure
+ * @author Dustin Gulley
+ * @date 03/30/2018
+ * The DG_Node_t structure holds void data and a reference to another node
+ *
+ */
 struct DG_Node_t {
-  void *data;                         // Generic Data
-  struct DG_Node_t *next;             // The next node in the list
+  void *data;                         /**< Single datum held by the dg_node. */
+  struct DG_Node_t *next;             /**< Reference to another dg_node. */
 };
 
-typedef struct DG_Node_t DG_Node;     // Node structure
+typedef struct DG_Node_t DG_Node;     /**< A realization of the DG_Node_t.  This is the typical type used. */
 
-DG_Node* new_node();                  // Get a new node
+/**
+ *
+ * @brief Creates and returns a new DG_Node.
+ * @author Dustin Gulley
+ * @date 03/30/2018
+ * Creates and returns a new DG_Node.
+ *
+ */
+DG_Node* new_node();
 
-void free_node(DG_Node **node);       // Free the allocated node
+/**
+ *
+ * @brief Frees an allocated DG_Node
+ * @author Dustin Gulley
+ * @date 03/30/2018
+ * Frees an allocated DG_Node
+ *
+ */
+void free_node(DG_Node **node);
 
 #endif                                // DG_NODE_H_
