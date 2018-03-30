@@ -10,4 +10,4 @@ Please see the following:
 2. [Installation](documentation/installation.md)
 3. [Overview](documentation/overview.md)
 4. [Tutorial](documentation/tutorial.md)
-5. [Reference](documentation/reference.md)
+5. [Reference](documentation/dg_node.md)
