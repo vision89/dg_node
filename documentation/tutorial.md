@@ -91,18 +91,13 @@ Finally follow the chain of nodes again, freeing the data stored in each node, a
 >
 
   while(iterator != NULL) {
-
      DG_Node \*temp_node = iterator->child;
-
      free(iterator->data);
-
      free_dg_node(&iterator);
-
      iterator = temp_node;
-
    }
 
->
+> 
 
 ### Step 14
 That's it.  You can compile the code by running `gcc ../../src/node/dg_node.c  tutorial.c`.  Then run the code by typing `./a.out`.
