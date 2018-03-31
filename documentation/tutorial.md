@@ -27,17 +27,17 @@ Note that throughout this tutorial I've tried to say dg_node but you may see the
 10. Iterate from 0 to MAX creating a new dg_node on each iteration.  Store a random integer in each node and set the new node as a child of the previous node:
   > for(int i = 0;i < MAX; ++i) {
 
-    > int \*b = malloc(sizeof(int));
+     int \*b = malloc(sizeof(int));
 
-    > \*b = rand();
+     \*b = rand();
 
-    > DG_Node \*temp_node = new_dg_node();
+     DG_Node \*temp_node = new_dg_node();
 
-    > temp_node->data = b;
+     temp_node->data = b;
 
-    > iterator->child = temp_node;
+     iterator->child = temp_node;
 
-    > iterator = iterator->child;
+     iterator = iterator->child;
 
   > }
 11.  Now we will have a chain of nodes, and from our root node we could follow each child down the chain.  Set the iterator back to the root.
