@@ -15,15 +15,15 @@
 
 /**
  *
- * @brief dg_node_t structure
+ * @brief A degree 1 node structure
  * @author Dustin Gulley
  * @date 03/30/2018
- * The DG_Node_t structure holds void data and a reference to another node.  This is used with the DG_Node type (see the types associated with the members for an example).
+ * A degree 1 node structure which holds void data and a reference to another node.  This is used with the DG_Node type (see the types associated with the members for an example).
  *
  */
 struct DG_Node_t {
   void *data;                         /**< Single datum held by the dg_node. */
-  struct DG_Node_t *next;             /**< Reference to another dg_node. */
+  struct DG_Node_t *child;             /**< Reference to another dg_node. */
 };
 
 typedef struct DG_Node_t DG_Node;     /**< A realization of the DG_Node_t.  This is the typical type used. */
@@ -36,7 +36,7 @@ typedef struct DG_Node_t DG_Node;     /**< A realization of the DG_Node_t.  This
  * Creates and returns a new DG_Node.
  *
  */
-DG_Node* new_node();
+DG_Node* new_dg_node();
 
 /**
  *
@@ -46,6 +46,6 @@ DG_Node* new_node();
  * Frees an allocated DG_Node
  *
  */
-void free_node(DG_Node **node);
+void free_dg_node(DG_Node **node);
 
 #endif                                // DG_NODE_H_

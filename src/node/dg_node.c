@@ -17,10 +17,10 @@
  * Creates and returns a new DG_Node.
  *
  */
-DG_Node* new_node() {
+DG_Node* new_dg_node() {
   DG_Node* generic_node = malloc(sizeof(DG_Node));  // Create a new node
   generic_node->data = NULL;                        // Default data to null
-  generic_node->next = NULL;                        // Default next to null
+  generic_node->child = NULL;                        // Default next to null
 
   return generic_node;                              // Return the new node
 }
@@ -33,7 +33,7 @@ DG_Node* new_node() {
  * Frees an allocated DG_Node
  *
  */
-void free_node(DG_Node **node) {
+void free_dg_node(DG_Node **node) {
   free(*node);
   *node = NULL;
 }

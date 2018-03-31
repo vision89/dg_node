@@ -2,13 +2,13 @@
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public `[`DG_Node`](#structDG__Node__t)` * `[`new_node`](#dg__node_8h_1ae8fd4f189e098a9d12de509e7fe18dea)`()`            | Creates and returns a new DG_Node.
-`public void `[`free_node`](#dg__node_8h_1ab79c7a730fad35e5b409617fe42ffae4)`(`[`DG_Node`](#structDG__Node__t)` ** node)`            | Frees an allocated DG_Node.
-`struct `[`DG_Node_t`](#structDG__Node__t) | dg_node_t structure
+`public `[`DG_Node`](#structDG__Node__t)` * `[`new_dg_node`](#dg__node_8h_1a1adf3c913eaa1eed73ec98e8689fc99f)`()`            | Creates and returns a new DG_Node.
+`public void `[`free_dg_node`](#dg__node_8h_1a715e69b0a26cec98911137ec9165495e)`(`[`DG_Node`](#structDG__Node__t)` ** node)`            | Frees an allocated DG_Node.
+`struct `[`DG_Node_t`](#structDG__Node__t) | A degree 1 node structure.
 
 ## Members
 
-#### `public `[`DG_Node`](#structDG__Node__t)` * `[`new_node`](#dg__node_8h_1ae8fd4f189e098a9d12de509e7fe18dea)`()` {#dg__node_8h_1ae8fd4f189e098a9d12de509e7fe18dea}
+#### `public `[`DG_Node`](#structDG__Node__t)` * `[`new_dg_node`](#dg__node_8h_1a1adf3c913eaa1eed73ec98e8689fc99f)`()` {#dg__node_8h_1a1adf3c913eaa1eed73ec98e8689fc99f}
 
 Creates and returns a new DG_Node.
 
@@ -16,7 +16,7 @@ Dustin Gulley
 
 03/30/2018 Creates and returns a new DG_Node.
 
-#### `public void `[`free_node`](#dg__node_8h_1ab79c7a730fad35e5b409617fe42ffae4)`(`[`DG_Node`](#structDG__Node__t)` ** node)` {#dg__node_8h_1ab79c7a730fad35e5b409617fe42ffae4}
+#### `public void `[`free_dg_node`](#dg__node_8h_1a715e69b0a26cec98911137ec9165495e)`(`[`DG_Node`](#structDG__Node__t)` ** node)` {#dg__node_8h_1a715e69b0a26cec98911137ec9165495e}
 
 Frees an allocated DG_Node.
 
@@ -26,18 +26,18 @@ Dustin Gulley
 
 # struct `DG_Node_t` {#structDG__Node__t}
 
-dg_node_t structure
+A degree 1 node structure.
 
 Dustin Gulley 
 
-03/30/2018 The [DG_Node_t](#structDG__Node__t) structure holds void data and a reference to another node
+03/30/2018 A degree 1 node structure which holds void data and a reference to another node. This is used with the DG_Node type (see the types associated with the members for an example).
 
 ## Summary
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
 `public void * `[`data`](#structDG__Node__t_1a9e124c6d59f4bca3b3f05302ea1ba67c) | Single datum held by the dg_node.
-`public struct `[`DG_Node_t`](#structDG__Node__t)` * `[`next`](#structDG__Node__t_1a0b0cd6b089770c34cd511f7511c84079) | Reference to another dg_node.
+`public struct `[`DG_Node_t`](#structDG__Node__t)` * `[`child`](#structDG__Node__t_1a809c69e2d80704da32bc3493cc23a1f6) | Reference to another dg_node.
 
 ## Members
 
@@ -45,7 +45,7 @@ Dustin Gulley
 
 Single datum held by the dg_node.
 
-#### `public struct `[`DG_Node_t`](#structDG__Node__t)` * `[`next`](#structDG__Node__t_1a0b0cd6b089770c34cd511f7511c84079) {#structDG__Node__t_1a0b0cd6b089770c34cd511f7511c84079}
+#### `public struct `[`DG_Node_t`](#structDG__Node__t)` * `[`child`](#structDG__Node__t_1a809c69e2d80704da32bc3493cc23a1f6) {#structDG__Node__t_1a809c69e2d80704da32bc3493cc23a1f6}
 
 Reference to another dg_node.
 
