@@ -108,7 +108,7 @@ Finally follow the chain of nodes again, freeing the data stored in each node, a
 That's it.  You can compile the code by running `gcc ../../src/node/dg_node.c  tutorial.c`.  Then run the code by typing `./a.out`.
 
 ### Step 15
-You should see something similar to ![output](tutorial_screenshot.png "output").
+You should see something similar to ![output](tutorial_screenshot.png "output")
 
 ### Step 16
 That wraps it up.  Again, for a complete reference to the code above please see [tutorial/tutorial.c](tutorial/tutorial.c).
