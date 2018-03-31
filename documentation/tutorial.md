@@ -60,12 +60,10 @@ Note that throughout this tutorial I've tried to say dg_node but you may see the
 
 11. Follow the chain of nodes and print the data stored in each.  DG_Node is created with the child set to NULL so we can follow the children down the chain until we reach a NULL value:
 
->
    while(iterator != NULL) {
      printf("%d\n", \*((int \*)iterator->data));
      iterator = iterator->child;
    }
->
 
 12. Set the iterator back to the root node.
 
