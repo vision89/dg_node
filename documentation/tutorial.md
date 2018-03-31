@@ -40,19 +40,28 @@ Create another dg_node which has the purpose of iterating through our dg_nodes.
 Add data to the root node.  The data in dg_node is of type `(void *)`.  Since we our storing integers in our dg_nodes we will need to create them on the heap and then store them in the node.  This means we will later need to free the data.  There is no build in function to free the data stored in the dg_node, this must be done manually:
 
   > int \*a = malloc(sizeof(int));
+
    \*a = rand();
+
   > root->data = a;
 
 ### Step 9
 Iterate from 0 to MAX creating a new dg_node on each iteration.  Store a random integer in each node and set the new node as a child of the previous node:
 
   > for(int i = 0;i < MAX; ++i) {
+
       int \*b = malloc(sizeof(int));
+
       \*b = rand();
+
       DG_Node \*temp_node = new_dg_node();
+
       temp_node->data = b;
+
       iterator->child = temp_node;
+
       iterator = iterator->child;
+
   > }
 
 ### Step 10
@@ -64,8 +73,11 @@ Now we will have a chain of nodes, and from our root node we could follow each c
 Follow the chain of nodes and print the data stored in each.  DG_Node is created with the child set to NULL so we can follow the children down the chain until we reach a NULL value:
 
   > while(iterator != NULL) {
+
      printf("%d\n", \*((int \*)iterator->data));
+
      iterator = iterator->child;
+
   > }
 
 ### Step 12
@@ -76,12 +88,21 @@ Set the iterator back to the root node.
 ### Step 13
 Finally follow the chain of nodes again, freeing the data stored in each node, as well as the node itself:
 
-  > while(iterator != NULL) {
+>
+
+  while(iterator != NULL) {
+
      DG_Node \*temp_node = iterator->child;
+
      free(iterator->data);
+
      free_dg_node(&iterator);
+
      iterator = temp_node;
-  > }
+
+   }
+
+>
 
 ### Step 14
 That's it.  You can compile the code by running `gcc ../../src/node/dg_node.c  tutorial.c`.  Then run the code by typing `./a.out`.
