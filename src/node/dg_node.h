@@ -15,18 +15,13 @@
 
 /**
  *
- * @brief A degree 1 node structure
+ * @brief A Type referring to a degree 1 node structure.
  * @author Dustin Gulley
  * @date 03/30/2018
- * A degree 1 node structure which holds void data and a reference to another node.  This is used with the DG_Node type (see the types associated with the members for an example).
+ * A Type referring to a degree 1 node structure.
  *
  */
-struct DG_Node_t {
-  void *data;                         /**< Single datum held by the dg_node. */
-  struct DG_Node_t *child;             /**< Reference to another dg_node. */
-};
-
-typedef struct DG_Node_t DG_Node;     /**< A realization of the DG_Node_t.  This is the typical type used. */
+typedef struct DG_Node *DG_Node_T;
 
 /**
  *
@@ -36,7 +31,47 @@ typedef struct DG_Node_t DG_Node;     /**< A realization of the DG_Node_t.  This
  * Creates and returns a new DG_Node.
  *
  */
-DG_Node* new_dg_node();
+extern DG_Node_T new_dg_node();
+
+/**
+ *
+ * @brief Add a child node to a DG_Node.
+ * @author Dustin Gulley
+ * @date 03/30/2018
+ * Add a child node to a DG_Node.
+ *
+ */
+extern void dg_node_add_child(DG_Node_T node, DG_Node_T child_node);
+
+/**
+ *
+ * @brief Add data to a DG_Node.
+ * @author Dustin Gulley
+ * @date 03/30/2018
+ * Add data to a DG_Node.
+ *
+ */
+extern void dg_node_add_data(DG_Node_T node, void *datum);
+
+/**
+ *
+ * @brief Gets data attached to a DG_Node.
+ * @author Dustin Gulley
+ * @date 03/30/2018
+ * Gets data attached to a DG_Node.
+ *
+ */
+extern void * dg_node_get_data(DG_Node_T node);
+
+/**
+ *
+ * @brief Gets a child attached to a DG_Node.
+ * @author Dustin Gulley
+ * @date 03/30/2018
+ * Gets a child attached to a DG_Node.
+ *
+ */
+extern DG_Node_T dg_node_get_child(DG_Node_T node);
 
 /**
  *
@@ -46,6 +81,15 @@ DG_Node* new_dg_node();
  * Frees an allocated DG_Node
  *
  */
-void free_dg_node(DG_Node **node);
+extern void free_dg_node(DG_Node_T *node);
+
+/**
+ *
+ * @brief Frees data associated with a DG_Node.
+ * @author Dustin Gulley
+ * @date 04/01/2018
+ * Frees data associated with a DG_Node.
+ */
+extern void free_dg_node_data(DG_Node_T *node);
 
 #endif                                // DG_NODE_H_

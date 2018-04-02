@@ -2,13 +2,17 @@
 
  Members                        | Descriptions                                
 --------------------------------|---------------------------------------------
-`public `[`DG_Node`](#structDG__Node__t)` * `[`new_dg_node`](#dg__node_8h_1a1adf3c913eaa1eed73ec98e8689fc99f)`()`            | Creates and returns a new DG_Node.
-`public void `[`free_dg_node`](#dg__node_8h_1a715e69b0a26cec98911137ec9165495e)`(`[`DG_Node`](#structDG__Node__t)` ** node)`            | Frees an allocated DG_Node.
-`struct `[`DG_Node_t`](#structDG__Node__t) | A degree 1 node structure.
+`public DG_Node_T `[`new_dg_node`](#dg__node_8h_1a6cafce8290916e74f58366c138670f01)`()`            | Creates and returns a new DG_Node.
+`public void `[`dg_node_add_child`](#dg__node_8h_1a3a0e68bdb0f3cfa8809cc835b1c00059)`(DG_Node_T node,DG_Node_T child_node)`            | Add a child node to a DG_Node.
+`public void `[`dg_node_add_data`](#dg__node_8h_1a9718f5b13ec835be06224460c31be656)`(DG_Node_T node,void * datum)`            | Add data to a DG_Node.
+`public void * `[`dg_node_get_data`](#dg__node_8h_1a5bab75d5aebe215f8c565e252fe49234)`(DG_Node_T node)`            | Gets data attached to a DG_Node.
+`public DG_Node_T `[`dg_node_get_child`](#dg__node_8h_1a12db554c12a0cc24338786bee11a4027)`(DG_Node_T node)`            | Gets a child attached to a DG_Node.
+`public void `[`free_dg_node`](#dg__node_8h_1a90b5495bd24fc5ec990deb534a05fe41)`(DG_Node_T * node)`            | Frees an allocated DG_Node.
+`public void `[`free_dg_node_data`](#dg__node_8h_1a10003be2358b8f0578b5a1a414f92a08)`(DG_Node_T * node)`            | Frees data associated with a DG_Node.
 
 ## Members
 
-#### `public `[`DG_Node`](#structDG__Node__t)` * `[`new_dg_node`](#dg__node_8h_1a1adf3c913eaa1eed73ec98e8689fc99f)`()` {#dg__node_8h_1a1adf3c913eaa1eed73ec98e8689fc99f}
+#### `public DG_Node_T `[`new_dg_node`](#dg__node_8h_1a6cafce8290916e74f58366c138670f01)`()` {#dg__node_8h_1a6cafce8290916e74f58366c138670f01}
 
 Creates and returns a new DG_Node.
 
@@ -16,7 +20,39 @@ Dustin Gulley
 
 03/30/2018 Creates and returns a new DG_Node.
 
-#### `public void `[`free_dg_node`](#dg__node_8h_1a715e69b0a26cec98911137ec9165495e)`(`[`DG_Node`](#structDG__Node__t)` ** node)` {#dg__node_8h_1a715e69b0a26cec98911137ec9165495e}
+#### `public void `[`dg_node_add_child`](#dg__node_8h_1a3a0e68bdb0f3cfa8809cc835b1c00059)`(DG_Node_T node,DG_Node_T child_node)` {#dg__node_8h_1a3a0e68bdb0f3cfa8809cc835b1c00059}
+
+Add a child node to a DG_Node.
+
+Dustin Gulley 
+
+03/30/2018 Add a child node to a DG_Node.
+
+#### `public void `[`dg_node_add_data`](#dg__node_8h_1a9718f5b13ec835be06224460c31be656)`(DG_Node_T node,void * datum)` {#dg__node_8h_1a9718f5b13ec835be06224460c31be656}
+
+Add data to a DG_Node.
+
+Dustin Gulley 
+
+03/30/2018 Add data to a DG_Node.
+
+#### `public void * `[`dg_node_get_data`](#dg__node_8h_1a5bab75d5aebe215f8c565e252fe49234)`(DG_Node_T node)` {#dg__node_8h_1a5bab75d5aebe215f8c565e252fe49234}
+
+Gets data attached to a DG_Node.
+
+Dustin Gulley 
+
+03/30/2018 Gets data attached to a DG_Node.
+
+#### `public DG_Node_T `[`dg_node_get_child`](#dg__node_8h_1a12db554c12a0cc24338786bee11a4027)`(DG_Node_T node)` {#dg__node_8h_1a12db554c12a0cc24338786bee11a4027}
+
+Gets a child attached to a DG_Node.
+
+Dustin Gulley 
+
+03/30/2018 Gets a child attached to a DG_Node.
+
+#### `public void `[`free_dg_node`](#dg__node_8h_1a90b5495bd24fc5ec990deb534a05fe41)`(DG_Node_T * node)` {#dg__node_8h_1a90b5495bd24fc5ec990deb534a05fe41}
 
 Frees an allocated DG_Node.
 
@@ -24,29 +60,12 @@ Dustin Gulley
 
 03/30/2018 Frees an allocated DG_Node
 
-# struct `DG_Node_t` {#structDG__Node__t}
+#### `public void `[`free_dg_node_data`](#dg__node_8h_1a10003be2358b8f0578b5a1a414f92a08)`(DG_Node_T * node)` {#dg__node_8h_1a10003be2358b8f0578b5a1a414f92a08}
 
-A degree 1 node structure.
+Frees data associated with a DG_Node.
 
 Dustin Gulley 
 
-03/30/2018 A degree 1 node structure which holds void data and a reference to another node. This is used with the DG_Node type (see the types associated with the members for an example).
-
-## Summary
-
- Members                        | Descriptions                                
---------------------------------|---------------------------------------------
-`public void * `[`data`](#structDG__Node__t_1a9e124c6d59f4bca3b3f05302ea1ba67c) | Single datum held by the dg_node.
-`public struct `[`DG_Node_t`](#structDG__Node__t)` * `[`child`](#structDG__Node__t_1a809c69e2d80704da32bc3493cc23a1f6) | Reference to another dg_node.
-
-## Members
-
-#### `public void * `[`data`](#structDG__Node__t_1a9e124c6d59f4bca3b3f05302ea1ba67c) {#structDG__Node__t_1a9e124c6d59f4bca3b3f05302ea1ba67c}
-
-Single datum held by the dg_node.
-
-#### `public struct `[`DG_Node_t`](#structDG__Node__t)` * `[`child`](#structDG__Node__t_1a809c69e2d80704da32bc3493cc23a1f6) {#structDG__Node__t_1a809c69e2d80704da32bc3493cc23a1f6}
-
-Reference to another dg_node.
+04/01/2018 Frees data associated with a DG_Node.
 
 Generated by [Moxygen](https://sourcey.com/moxygen)

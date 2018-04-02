@@ -20,19 +20,19 @@ int main() {
   /**
    * Reference to the root node
    */
-  DG_Node *root = new_dg_node();
+  DG_Node_T root = new_dg_node();
 
   /**
    * Node used for iteration
    */
-  DG_Node *iterator = root;
+  DG_Node_T iterator = root;
 
   /**
    * Add data to the node
    */
    int *a = malloc(sizeof(int));
    *a = rand();
-   root->data = a;
+   dg_node_add_data(root, a);
 
    for(int i = 0;i < MAX; ++i) {
      int *b = malloc(sizeof(int));
@@ -41,12 +41,12 @@ int main() {
      /**
       * Create a new node and add it to the iterators child reference
       */
-     DG_Node *temp_node = new_dg_node();
-     temp_node->data = b;
-     iterator->child = temp_node;
+     DG_Node_T temp_node = new_dg_node();
+     dg_node_add_data(temp_node, b);
+     dg_node_add_child(iterator, temp_node);
 
      //Set iterator to the child as we continue the loop
-     iterator = iterator->child;
+     iterator = dg_node_get_child(iterator);
 
    }
 
@@ -59,8 +59,8 @@ int main() {
     * until NULL is reached.
     */
    while(iterator != NULL) {
-     printf("%d\n", *((int *)iterator->data));
-     iterator = iterator->child;
+     printf("%d\n", *((int *) dg_node_get_data(iterator)));
+     iterator = dg_node_get_child(iterator);
    }
 
    //Set iterator back to root
@@ -71,10 +71,10 @@ int main() {
     * contain and the node itself.
     */
    while(iterator != NULL) {
-     DG_Node *temp_node = iterator->child;  //Get a reference to the next node as we will free the parent
-     free(iterator->data);                  //Free the contained data
-     free_dg_node(&iterator);               //Free the node
-     iterator = temp_node;                  //Set iterator to the child and continue
+     DG_Node_T temp_node = dg_node_get_child(iterator) ;  //Get a reference to the next node as we will free the parent
+     free_dg_node_data(&iterator);                        //Free the contained data
+     free_dg_node(&iterator);                             //Free the node
+     iterator = temp_node;                                //Set iterator to the child and continue
    }
 
    return 0;
