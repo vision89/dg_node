@@ -17,26 +17,10 @@
  * A realization of DG_Node_T, which is a type referring to a degree 1 node structure.
  *
  */
-struct DG_Node {
+struct dg_node_data {
   void *data;
-  struct DG_Node *child;
+  struct dg_node *child;
 };
-
-/**
- *
- * @brief Creates and returns a new DG_Node.
- * @author Dustin Gulley
- * @date 03/30/2018
- * Creates and returns a new DG_Node.
- *
- */
-DG_Node_T new_dg_node() {
-  DG_Node_T generic_node = malloc(sizeof(struct DG_Node));  // Create a new node
-  generic_node->data = NULL;                        // Default data to null
-  generic_node->child = NULL;                        // Default next to null
-
-  return generic_node;                              // Return the new node
-}
 
 /**
  *
@@ -46,8 +30,9 @@ DG_Node_T new_dg_node() {
  * Add a child node to a DG_Node.
  *
  */
-void dg_node_add_child(DG_Node_T node, DG_Node_T child_node) {
-  node->child = child_node;
+static void dg_node_set_child(struct dg_node self, struct dg_node child) {
+  dg_node_data_td *node = self.node;
+  (*node)->child = &child;
 }
 
 /**
@@ -58,8 +43,9 @@ void dg_node_add_child(DG_Node_T node, DG_Node_T child_node) {
  * Add data to a DG_Node.
  *
  */
-void dg_node_add_data(DG_Node_T node, void *datum) {
-  node->data = datum;
+void dg_node_set_data(struct dg_node self, void *datum) {
+  dg_node_data_td *node = self.node;
+  (*node)->data = datum;
 }
 
 /**
@@ -70,8 +56,9 @@ void dg_node_add_data(DG_Node_T node, void *datum) {
  * Gets data attached to a DG_Node.
  *
  */
-void * dg_node_get_data(DG_Node_T node) {
-  return node->data;
+void * dg_node_get_data(struct dg_node self) {
+  dg_node_data_td *node = self.node;
+  return (*node)->data;
 }
 
 /**
@@ -82,8 +69,23 @@ void * dg_node_get_data(DG_Node_T node) {
  * Gets a child attached to a DG_Node.
  *
  */
-DG_Node_T dg_node_get_child(DG_Node_T node) {
-  return node->child;
+struct dg_node dg_node_get_child(struct dg_node self) {
+  dg_node_data_td *node = self.node;
+  return *((*node)->child);
+}
+
+/**
+ *
+ * @brief Frees data associated with a DG_Node.
+ * @author Dustin Gulley
+ * @date 04/01/2018
+ * Frees data associated with a DG_Node.
+ */
+void free_dg_node_data(dg_node_data_td *node) {
+  if(node != NULL) {
+    free(*node);
+    *node = NULL;
+  }
 }
 
 /**
@@ -94,23 +96,57 @@ DG_Node_T dg_node_get_child(DG_Node_T node) {
  * Frees an allocated DG_Node
  *
  */
-void free_dg_node(DG_Node_T *node) {
-  if((*node) != NULL) {
-    free(*node);
-    *node = NULL;
+void free_dg_node(struct dg_node *self) {
+
+  dg_node_data_td node = *(self->node);
+  free_dg_node_data(&node);
+
+  if(self != NULL) {
+    free(self);
+    self = NULL;
   }
 }
 
 /**
  *
- * @brief Frees data associated with a DG_Node.
+ * @brief Creates node data
  * @author Dustin Gulley
- * @date 04/01/2018
- * Frees data associated with a DG_Node.
+ * @date 03/30/2018
+ * Creates node data
+ *
  */
-void free_dg_node_data(DG_Node_T *node) {
-  if((*node)->data != NULL) {
-    free((*node)->data);
-    (*node)->data = NULL;
-  }
+dg_node_data_td dg_node_data_new() {
+
+  dg_node_data_td generic_node = malloc(sizeof(struct dg_node_data));
+  generic_node->data = NULL;
+  generic_node->child = NULL;
+
+  return generic_node;
+
+}
+
+/**
+ *
+ * @brief Creates and returns a new DG_Node.
+ * @author Dustin Gulley
+ * @date 03/30/2018
+ * Creates and returns a new DG_Node.
+ *
+ */
+dg_node_td new_dg_node() {
+
+  //Create new data
+  dg_node_data_td new_node_data = malloc(sizeof(struct dg_node_data));
+  new_node_data->child = NULL;
+  new_node_data->data = NULL;
+
+  //Create a new node
+  dg_node_td new_node = malloc(sizeof(struct dg_node));  // Create a new node
+  new_node->set_child = &dg_node_set_child;
+  new_node->set_data = &dg_node_set_data;
+  new_node->get_data = &dg_node_get_data;
+  new_node->get_child = &dg_node_get_child;
+  new_node->free = &free_dg_node;
+
+  return new_node;                                      // Return the new node
 }
