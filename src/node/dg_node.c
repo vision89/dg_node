@@ -30,9 +30,9 @@ struct dg_node_data {
  * Add a child node to a DG_Node.
  *
  */
-static void dg_node_set_child(dg_node_td self, struct dg_node child) {
+static void dg_node_set_child(dg_node_td self, dg_node_td child) {
   dg_node_data_td node = self->node;
-  node->child = &child;
+  node->child = child;
 }
 
 /**
@@ -81,7 +81,7 @@ static dg_node_td dg_node_get_child(dg_node_td self) {
  * @date 04/01/2018
  * Frees data associated with a DG_Node.
  */
-static void free_dg_node_data(dg_node_data_td *node) {
+static void free_dg_node_node(dg_node_data_td *node) {
   if(node != NULL) {
     free(*node);
     *node = NULL;
@@ -99,12 +99,31 @@ static void free_dg_node_data(dg_node_data_td *node) {
 static void free_dg_node(dg_node_td *self) {
 
   dg_node_data_td node = (*self)->node;
-  free_dg_node_data(&node);
+  free_dg_node_node(&node);
 
   if(self != NULL) {
-    free(self);
-    self = NULL;
+    free(*self);
+    *self = NULL;
   }
+}
+
+/**
+*
+* @brief Frees data on a DG_Node
+* @author Dustin Gulley
+* @date 04/07/2018
+* Frees data on a DG_Node
+*
+*/
+static void free_dg_node_data(dg_node_td self) {
+
+  dg_node_data_td node = self->node;
+
+  if(node->data != NULL) {
+    free(node->data);
+    node->data = NULL;
+  }
+
 }
 
 /**
@@ -143,6 +162,7 @@ dg_node_td new_dg_node() {
   new_node->get_data = &dg_node_get_data;
   new_node->get_child = &dg_node_get_child;
   new_node->free = &free_dg_node;
+  new_node->free_data = &free_dg_node_data;
 
   return new_node;                                        // Return the new node
 }

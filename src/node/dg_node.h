@@ -51,7 +51,7 @@ typedef struct dg_node {
    * Add a child node to a DG_Node.
    *
    */
-  void (*set_child) (struct dg_node *self, struct dg_node child);
+  void (*set_child) (struct dg_node *self, struct dg_node * child);
 
   /**
    *
@@ -92,6 +92,16 @@ typedef struct dg_node {
    *
    */
   void (*free) (struct dg_node **self);
+
+  /**
+  *
+  * @brief Frees data on a DG_Node
+  * @author Dustin Gulley
+  * @date 04/07/2018
+  * Frees data on a DG_Node
+  *
+  */
+  void (*free_data) (struct dg_node *self);
 
 } * dg_node_td;
 
