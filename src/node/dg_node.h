@@ -41,7 +41,7 @@ typedef struct dg_node {
    * Data associated with a degree 1 node structure.
    *
    */
-  dg_node_data_td *node;
+  dg_node_data_td node;
 
   /**
    *
@@ -51,7 +51,7 @@ typedef struct dg_node {
    * Add a child node to a DG_Node.
    *
    */
-  void (*set_child) (struct dg_node self, struct dg_node child);
+  void (*set_child) (struct dg_node *self, struct dg_node child);
 
   /**
    *
@@ -61,7 +61,7 @@ typedef struct dg_node {
    * Add data to a DG_Node.
    *
    */
-  void (*set_data) (struct dg_node self, void *datum);
+  void (*set_data) (struct dg_node *self, void *datum);
 
   /**
    *
@@ -71,7 +71,7 @@ typedef struct dg_node {
    * Gets data attached to a DG_Node.
    *
    */
-  void * (*get_data) (struct dg_node self);
+  void * (*get_data) (struct dg_node *self);
 
   /**
    *
@@ -81,7 +81,7 @@ typedef struct dg_node {
    * Gets a child attached to a DG_Node.
    *
    */
-  struct dg_node (*get_child) (struct dg_node self);
+  struct dg_node * (*get_child) (struct dg_node *self);
 
   /**
    *
@@ -91,7 +91,7 @@ typedef struct dg_node {
    * Frees an allocated DG_Node
    *
    */
-  void (*free) (struct dg_node *self);
+  void (*free) (struct dg_node **self);
 
 } * dg_node_td;
 

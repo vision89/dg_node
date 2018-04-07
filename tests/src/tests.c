@@ -1,18 +1,21 @@
 #include <assert.h>
 #include <stdio.h>
+#include <stdint.h>
 #include "../../src/node/dg_node.h"
 
 int main(int argc, char* argv[]) {
+  char *test_data = malloc(9 * sizeof(char));                         // Will be data to use for testing
+  char *test_data_2 = malloc(9 * sizeof(char));                       // Will be data to use for testing
+  dg_node_td generic_node = new_dg_node();                            // Node to test
+  dg_node_td generic_node_2 = new_dg_node();                          // Node to test
 
-  DG_Node_T generic_node = new_dg_node();                                     // Node to test
-  DG_Node_T generic_node_2 = new_dg_node();                                   // Node to test
-  char test_data[] = "Test one";                                              // Data to use for testing
-  char test_data_2[] = "Test one";                                            // Data to use for testing
+  test_data = "Test one\0";                                           // Data to use for testing
+  test_data_2 = "Test one\0";                                         // Data to use for testing
 
-  assert(dg_node_get_data(generic_node) == NULL);                             // The nodes data should default to NULL
-  assert(dg_node_get_child(generic_node) == NULL);                            // The nodes next should default to NULL
-  assert(dg_node_get_data(generic_node_2) == NULL);                           // The nodes data should default to NULL
-  assert(dg_node_get_child(generic_node_2) == NULL);                          // The nodes next should default to NULL
+  assert(generic_node->get_data(generic_node) == NULL);               // The nodes data should default to NULL
+  assert(generic_node->get_child(generic_node) == NULL);              // The nodes next should default to NULL
+  assert(generic_node_2->get_data(generic_node_2) == NULL);           // The nodes data should default to NULL
+  assert(generic_node_2->get_child(generic_node_2) == NULL);          // The nodes next should default to NULL
 
   dg_node_add_data(generic_node, test_data);                                  // Set the data
   dg_node_add_data(generic_node_2, test_data_2);                              // Set the data

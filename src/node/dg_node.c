@@ -30,9 +30,9 @@ struct dg_node_data {
  * Add a child node to a DG_Node.
  *
  */
-static void dg_node_set_child(struct dg_node self, struct dg_node child) {
-  dg_node_data_td *node = self.node;
-  (*node)->child = &child;
+static void dg_node_set_child(dg_node_td self, struct dg_node child) {
+  dg_node_data_td node = self->node;
+  node->child = &child;
 }
 
 /**
@@ -43,9 +43,9 @@ static void dg_node_set_child(struct dg_node self, struct dg_node child) {
  * Add data to a DG_Node.
  *
  */
-void dg_node_set_data(struct dg_node self, void *datum) {
-  dg_node_data_td *node = self.node;
-  (*node)->data = datum;
+static void dg_node_set_data(dg_node_td self, void *datum) {
+  dg_node_data_td node = self->node;
+  node->data = datum;
 }
 
 /**
@@ -56,9 +56,9 @@ void dg_node_set_data(struct dg_node self, void *datum) {
  * Gets data attached to a DG_Node.
  *
  */
-void * dg_node_get_data(struct dg_node self) {
-  dg_node_data_td *node = self.node;
-  return (*node)->data;
+static void * dg_node_get_data(dg_node_td self) {
+  dg_node_data_td node = self->node;
+  return node->data;
 }
 
 /**
@@ -69,9 +69,9 @@ void * dg_node_get_data(struct dg_node self) {
  * Gets a child attached to a DG_Node.
  *
  */
-struct dg_node dg_node_get_child(struct dg_node self) {
-  dg_node_data_td *node = self.node;
-  return *((*node)->child);
+static dg_node_td dg_node_get_child(dg_node_td self) {
+  dg_node_data_td node = self->node;
+  return node->child;
 }
 
 /**
@@ -81,7 +81,7 @@ struct dg_node dg_node_get_child(struct dg_node self) {
  * @date 04/01/2018
  * Frees data associated with a DG_Node.
  */
-void free_dg_node_data(dg_node_data_td *node) {
+static void free_dg_node_data(dg_node_data_td *node) {
   if(node != NULL) {
     free(*node);
     *node = NULL;
@@ -96,9 +96,9 @@ void free_dg_node_data(dg_node_data_td *node) {
  * Frees an allocated DG_Node
  *
  */
-void free_dg_node(struct dg_node *self) {
+static void free_dg_node(dg_node_td *self) {
 
-  dg_node_data_td node = *(self->node);
+  dg_node_data_td node = (*self)->node;
   free_dg_node_data(&node);
 
   if(self != NULL) {
@@ -135,18 +135,14 @@ dg_node_data_td dg_node_data_new() {
  */
 dg_node_td new_dg_node() {
 
-  //Create new data
-  dg_node_data_td new_node_data = malloc(sizeof(struct dg_node_data));
-  new_node_data->child = NULL;
-  new_node_data->data = NULL;
-
   //Create a new node
-  dg_node_td new_node = malloc(sizeof(struct dg_node));  // Create a new node
+  dg_node_td new_node = malloc(sizeof(struct dg_node));   // Create a new node
+  new_node->node = dg_node_data_new();
   new_node->set_child = &dg_node_set_child;
   new_node->set_data = &dg_node_set_data;
   new_node->get_data = &dg_node_get_data;
   new_node->get_child = &dg_node_get_child;
   new_node->free = &free_dg_node;
 
-  return new_node;                                      // Return the new node
+  return new_node;                                        // Return the new node
 }
