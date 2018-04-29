@@ -35,14 +35,14 @@ Now create the main method, the remainder of the code will be typed within the m
 Create a root dg_node, we will be careful not to alter this so that we always have a reference back to the root node.  We will create a new dg_node using the function `new_dg_node`.  This function creates a new dg_node on the heap and returns it.  Since it is created on the heap it must later be freed.  There is a function included with dg_node which will both free the node and set it to NULL which we will go over shortly:
 
 ```
-  DG_Node *root = new_dg_node();
+  dg_node_td root = new_dg_node();
 ```
 
 ### Step 7
 Create another dg_node which has the purpose of iterating through our dg_nodes.
 
 ```
-  DG_Node *iterator = root;
+  dg_node_td iterator = root;
 ```
 
 ### Step 8
@@ -51,7 +51,7 @@ Add data to the root node.  The data in dg_node is of type `(void *)`.  Since we
 ```
   int *a = malloc(sizeof(int));
   *a = rand();
-  root->data = a;
+  root->set_data(root, a);
 ```
 
 ### Step 9
@@ -61,10 +61,10 @@ Iterate from 0 to MAX creating a new dg_node on each iteration.  Store a random 
   for(int i = 0;i < MAX; ++i) {
     int *b = malloc(sizeof(int));
     *b = rand();
-    DG_Node *temp_node = new_dg_node();
-    temp_node->data = b;
-    iterator->child = temp_node;
-    iterator = iterator->child;
+    dg_node_td temp_node = new_dg_node();
+    temp_node->set_data(temp_node, b);
+    iterator->set_child(iterator, temp_node);
+    iterator = iterator->get_child(iterator);
   }
 ```
 
@@ -80,8 +80,8 @@ Follow the chain of nodes and print the data stored in each.  DG_Node is created
 
 ```
   while(iterator != NULL) {
-    printf("%d\n", *((int *)iterator->data));
-    iterator = iterator->child;
+    printf("%d\n", *((int *) iterator->get_data(iterator)));
+    iterator = iterator->get_child(iterator);
   }
 ```
 
@@ -97,10 +97,10 @@ Finally follow the chain of nodes again, freeing the data stored in each node, a
 
 ```
   while(iterator != NULL) {
-     DG_Node *temp_node = iterator->child;
-     free(iterator->data);
-     free_dg_node(&iterator);
-     iterator = temp_node;
+    dg_node_td temp_node = iterator->get_child(iterator);
+    iterator->free_data(iterator);
+    iterator->free(&iterator);
+    iterator = temp_node;
    }
 ```
 

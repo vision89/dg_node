@@ -2,7 +2,7 @@ clear
 
 echo "Building the reference documentation"
 
-rm -rf ./documentation/xml/*
+rm -rf documentation/xml/*
 
 doxygen dox_config.cnf
 

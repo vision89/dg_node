@@ -8,9 +8,9 @@ if [ ! -d "./tests/bin" ]; then
   mkdir ./tests/bin
 fi
 
-rm -rf ./tests/bin/*
+rm -rf tests/bin/*
 
-gcc -o ./tests/bin/tests ./src/node/dg_node.c ./tests/src/tests.c
+gcc -o tests/bin/tests src/node/dg_node.c tests/src/tests.c
 
 echo "Finished Building"
 

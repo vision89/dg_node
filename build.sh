@@ -8,8 +8,8 @@ if [ ! -d "./bin" ]; then
   mkdir ./bin
 fi
 
-rm -rf ./bin/*
+rm -rf bin/*
 
-gcc -c ./src/node/dg_node.c -o ./bin/dg_node
+gcc -c src/node/dg_node.c -o bin/dg_node
 
 echo "Finished Building"
