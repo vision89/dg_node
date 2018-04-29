@@ -20,19 +20,19 @@ int main() {
   /**
    * Reference to the root node
    */
-  DG_Node_T root = new_dg_node();
+  dg_node_td root = new_dg_node();
 
   /**
    * Node used for iteration
-   */
-  DG_Node_T iterator = root;
+   */                                                                              // Node to test
+  dg_node_td iterator = root;
 
   /**
    * Add data to the node
    */
    int *a = malloc(sizeof(int));
    *a = rand();
-   dg_node_add_data(root, a);
+   root->set_data(root, a);
 
    for(int i = 0;i < MAX; ++i) {
      int *b = malloc(sizeof(int));
@@ -41,12 +41,12 @@ int main() {
      /**
       * Create a new node and add it to the iterators child reference
       */
-     DG_Node_T temp_node = new_dg_node();
-     dg_node_add_data(temp_node, b);
-     dg_node_add_child(iterator, temp_node);
+     dg_node_td temp_node = new_dg_node();
+     temp_node->set_data(temp_node, b);
+     iterator->set_child(iterator, temp_node);
 
      //Set iterator to the child as we continue the loop
-     iterator = dg_node_get_child(iterator);
+     iterator = iterator->get_child(iterator);
 
    }
 
@@ -59,8 +59,8 @@ int main() {
     * until NULL is reached.
     */
    while(iterator != NULL) {
-     printf("%d\n", *((int *) dg_node_get_data(iterator)));
-     iterator = dg_node_get_child(iterator);
+     printf("%d\n", *((int *) iterator->get_data(iterator)));
+     iterator = iterator->get_child(iterator);
    }
 
    //Set iterator back to root
@@ -71,10 +71,10 @@ int main() {
     * contain and the node itself.
     */
    while(iterator != NULL) {
-     DG_Node_T temp_node = dg_node_get_child(iterator) ;  //Get a reference to the next node as we will free the parent
-     free_dg_node_data(&iterator);                        //Free the contained data
-     free_dg_node(&iterator);                             //Free the node
-     iterator = temp_node;                                //Set iterator to the child and continue
+     dg_node_td temp_node = iterator->get_child(iterator);  //Get a reference to the next node as we will free the parent
+     iterator->free_data(iterator);                         //Free the contained data
+     iterator->free(&iterator);                             //Free the node
+     iterator = temp_node;                                  //Set iterator to the child and continue
    }
 
    return 0;
