@@ -8,8 +8,12 @@ if [ ! -d "./bin" ]; then
   mkdir ./bin
 fi
 
-rm -rf bin/*
+if [ ! -d "./bin/mac" ]; then
+  mkdir ./bin/mac
+fi
 
-gcc -c src/node/dg_node.c -o bin/dg_node
+rm -rf bin/mac/*
+
+gcc -c src/node/dg_node.c -o bin/mac/dg_node
 
 echo "Finished Building"
